@@ -1,131 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml; charset=UTF-8" />
+<title>summary</title>
+<style >
+ body {bgcolor:white}
+ 
+ p {
+  margin-top: 0em;
+  margin-bottom: 2em;
+ }
+  
+ table, td, th, tr {border:1px solid black; border-collapse:collapse; padding:7px 5px;}
+ tbody tr:nth-of-type(2n+1) {
+  background: none repeat scroll 0 0 #ebebeb;
+ }
+
+
+</style>
+
+</head>
 <body>
 <pre {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;}>
 
-<p>19-12-2014</p>
+#!html_output#
 
-Summary table
-=============
+<code>
+#create plot
+for t in $(ls *.tsv) ; do echo $t; head -1 $t >${t}.tmp;tail -n+2 $t|sort -d$(echo -e "\t") -k2,2n  >>${t}.tmp;Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf; rm ${t}.tmp ; done
 
-1. sample after adapter trim | reads(fwd/reverse) | 2. after collapse reads | Reads | Collapsed reads | 3. remove linkers (GAC/TAAGG/TACCAGTAAGG) | Reads | Collapsed reads | % Reads vs 2. after collapse | 4. Filter on length >= 33 &  <= 34 | Reads | Collapsed reads | % Reads vs Reads at collapse | 5. Remove homologs | Reads | Collapsed reads
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-17-eGFPfwd3E | 843410/644126  | | 843410 | 60415 |  | 71968 | 1411 | 8.53% |  | 67202 | 1307 | 7.97% |  | 649390 | 640
-18-eGFPfwd3L| 1481063/1119915 | | 1481063 | 106581 |  | 128694 | 1945 | 8.69% |  | 120046 | 1793 | 8.11% |  | 1177324 | 901
-8-eGFPfwd3L| 1543617/1562697 | | 1543617 | 88881 |  | 137310 | 2407 | 8.90% |  | 127675 | 2219 | 8.27% |  | 1247783 | 742
-eGFPfwd3-193| 867406/1208614 | | 867406 | 49302 |  | 77798 | 875 | 8.97% |  | 72331 | 793 | 8.34% |  | 717257 | 669
-
-initital fastq: 13882978 reads
-
-
-Adapter trim
-============
-
-A trim for the following adapters was performed. In our script allowed for 1 single nucleotide mismatch and it was done seperately for recognising the forward and reverse insetrion of the sequence. Note that in the actual contruct the reverse primer is reverse complemented to match the forward primer. 
-
-PCRset | Forward primer name | Forward primer sequence | Forward primer sequence_original | Reverse primer name | Reverse primer sequence
---- | --- | --- | --- | --- | ---
-1 | 8-eGFPfwd3L | AATCCGTCCAAGGCATGGACGAGCTGTACAAG | AATCCGTCCAAGGCATGGACGAGCTGTACAAG | BC-rev-L+2:      | ATGGGGGATCCTCACTGGCC
-2 | 17-eGFPfwd3E | CAAGAATATTCTCGGCATGGACGAGCTGTACAAG | CAAGAATATTCTCGGCATGGACGAGCTG | BC-rev-L+6:   | TAATATGGGGGATCCTCACTGGCC
-3 | eGFPfwd3-193 | TCATCTCTGGCATGGACGAGCTGTACAAG | TCATCTCTGGCATGGACGAGCTGTACAAG | BC-rev-L+5:   | AATATGGGGGATCCTCACTGGCC
-4 | 18-eGFPfwd3L | ATCGAATTTATGGCATGGACGAGCTGTACAAG | ATCGAATTTATGGCATGGACGAGCTGTACAAG | BC-rev-L+1:   | TGGGGGATCCTCACTGGCC
-
-
-
-Read collapse
-=============
-
-recution of duplicate reads to a single fasta entry.
-fastq example:
-@read1
-AAAAAAAAAAAAAAAAAA
-+read1
-ABBDFDFDFDFDDDGGGG
-@read2
-AAAAAAAAAAAAAAAAAA
-+read2
-ABBDFDFDFDFDDDDDDD
-@read3
-AAAAAAAAAAAAAAANAA
-+read4
-ABBDFDFDFDFDDDDDDD
-
-after collapse:
-\>SEQ_1_x2
-AAAAAAAAAAAAAAAAAA
-\>SEQ_3_x1
-AAAAAAAAAAAAAAANAA
-
-Linker trim
-===========
-
-Removal of the linker sequences from the end of the reads (GAC/TAAGG/TACCAGTAAGG).
-These linkers are present between the adapters and the 33nt barcode.
-
-
-Filter by length
-================
-
-|keep 33-34: |
-| --- |
-|GTTACATAGTTGCCGAATTATCGCAGAATGTAA |
-|AAGGTACCATGTCACCGGTTTAAACCATACTAAG |
-|not |
-|GTTACATAGT |
-|GTTACATAGTAAGGTACCATGTCACCGGTTTAAACCATACTAAG |
-
-Homolog removal
-===============
-
-Removal of similar sequences by trimming data.
-
-this was done:
- - Allowing 1 single nucleotide mismatch
- - Removing the reads with a count less than or equal to 1
- - Removing reads when it has a homolog read with a higher count
-
-
-
-code for different tasks
-========================
-
-this is example code and will probably not work on your system.
-
-create plot
-
-```sh
-for t in $(ls *.tsv) ; do 
-    echo $t;
-    head -1 $t >${t}.tmp;
-    tail -n+2 $t|sort -d$(echo -e "\t") -k2,2n  >>${t}.tmp;
-    Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf;
-    rm ${t}.tmp ;
-done
-```
-
-create tsv
-
-```sh
+#create tsv
 for fa in $(ls filterlength/*/bctrim.collapsed.fa); do basenamefa=$(basename $(dirname $fa) .keep_33-34);dirnamefa=./;echo -e "ID\tcounts\tsequence" > ${dirnamefa}/${basenamefa}.tsv;perl -ne 'chomp; s/^>SEQ_|\n//g;s/_x|_/\t/g;print $_ if $.%2==1;print "\t".$_."\n" if $.%2==0;' $fa >> ${dirnamefa}/${basenamefa}.tsv; done
-```
 
-filter for homolog barcodes
-
-```sh
+#filter for homolog barcodes
 (for i in $(ls filterlength/*.fa); do echo $i;perl ~/workspace/FastqManipulations/barcodeCleanup.pl $i & done)&
-```
 
-code for filtering by length
-
-```
+#code for filtering by length
 mkdir -p  filterlength; 
 for fa in $(ls trimlinkers/*.fa); do 
 	perl ~/workspace/FastqManipulations/FilterFaByLength.pl 33 34 $fa > filterlength/$(basename $fa .trim_GAC_TAAGG.fa).keep_33-34.fa ;
 done
-```
 
-collapse again?
+#collapse again?
 
-code for trimming linkers
-```sh
+#code for trimming linkers
 mkdir -p trimlinkers;
 for fa in $(ls collapse/*fa); do 
 	basenamefa=$(basename $fa .collapse_md.fa);
@@ -133,12 +50,10 @@ for fa in $(ls collapse/*fa); do
 	perl ~/workspace/FastqManipulations/TrimGACfa.pl -| \
 	perl ~/workspace/FastqManipulations/TrimTAAGGfa.pl - > trimlinkers/${basenamefa}.trim_GAC_TAAGG.fa;
 done
-```sh
 
 
-code for collapse (using the mirdeep package)
 
-```sh
+#code for collapse (using the mirdeep package)
 mkdir -p collapse;
 for fq in $(ls trimAdapters/*.fq); do 
 	dirnamefq=$(dirname $fq);
@@ -147,11 +62,8 @@ for fq in $(ls trimAdapters/*.fq); do
 	fastq2fasta.pl -| \
 	collapse_reads_md.pl - SEQ > collapse/${basenamefq}.collapse_md.fa;
 done
-```
 
-code for trimming adapters
-
-```sh
+#code for trimming adapters
 for data in $(cat samplesheet.csv); do 
 	CMD=$data";
 	echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
@@ -162,9 +74,8 @@ for data in $(cat samplesheet.csv); do
 	perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a \$(perl -wpe 'chomp;\$_=reverse(\$_);tr/ATCGNatcgn/TAGCNtagcn/;' <(echo \$reversePrimer )) -B -m 1 -o - > trimAdapters/\${samplename}.fwtrim.fq) &" ; 
 	echo $CMD;
 done
-```
-copypase/pipe to bash the returned commands are good for trimming
-
+#copypase/pipe to bash the returned commands are good for trimming
+</code>
 
 #them comparison
 TGGGGGATCCTCACTGGCCGTC

@@ -1,0 +1,2 @@
+library("knitr")
+knit2html("summary.md", output="../summary.html", template="template.md.html" )
