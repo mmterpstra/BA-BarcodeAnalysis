@@ -26,7 +26,7 @@ Summary table
 =============
 this table tries to sum it up
 
-\1. sample after adapter trim | reads(fwd/reverse) | \2. after collapse reads | Reads | Collapsed reads | \3. remove linkers (GAC/TAAGG/TACCAGTAAGG) | Reads | Collapsed reads | % Reads vs \2. after collapse | \4. Filter on length >= 33 &  <= 34 | Reads | Collapsed reads | % Reads vs Reads at collapse | \5. Remove homologs | Reads | Collapsed reads
+1. sample after adapter trim | reads(fwd/reverse) | 2. after collapse reads | Reads | Collapsed reads | 3. remove linkers (GAC/TAAGG/TACCAGTAAGG) | Reads | Collapsed reads | % Reads vs 2. after collapse | 4. Filter on length >= 33 &  <= 34 | Reads | Collapsed reads | % Reads vs Reads at collapse | 5. Remove homologs | Reads | Collapsed reads
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 17-eGFPfwd3E | 843410/644126  | | 843410 | 60415 |  | 71968 | 1411 | 8.53% |  | 67202 | 1307 | 7.97% |  | 649390 | 640
 18-eGFPfwd3L| 1481063/1119915 | | 1481063 | 106581 |  | 128694 | 1945 | 8.69% |  | 120046 | 1793 | 8.11% |  | 1177324 | 901
@@ -102,7 +102,15 @@ this was done:
  - Removing the reads with a count less than or equal to 1
  - Removing reads when it has a homolog read with a higher count
 
+Homolog removal (again)
+===============
 
+Removal of similar sequences by trimming data.
+
+this was done:
+ - Allowing **2** single nucleotide mismatches
+ - Removing the reads with a count less than or equal to 1
+ - Removing reads when it has a homolog read with a higher count
 
 code for different tasks
 ========================
@@ -197,7 +205,7 @@ copypase/pipe to bash the returned commands are good for trimming
 The data
 ========
 
-contruct examples for the visual people. red == adapters and in between are 33 nt barcode + linkers
+contruct examples for the visual people. bold == adapters and in between are 33 nt barcode + linkers
 
 <font size="5">
 
