@@ -186,7 +186,7 @@ for fq in $(ls trimAdapters/*.fq); do
 	dirnamefq=$(dirname $fq);
 	basenamefq=$(basename $(basename $fq .fwtrim.fq) .rvtrim.fq);
 	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
-		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;' $dirnamefq/${basenamefq}.rvtrim.fq) | \
+		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.rvtrim.fq) | \
 	fastq2fasta.pl -| \
 	collapse_reads_md.pl - SEQ > collapse/${basenamefq}.collapse_md.fa;
 done
