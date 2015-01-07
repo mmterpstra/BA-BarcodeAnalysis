@@ -157,7 +157,7 @@ done)&
 
 code for filtering by length
 
-```
+```sh
 mkdir -p  filterlength; 
 for fa in $(ls trimlinkers/*.fa); do 
 	perl ~/workspace/FastqManipulations/FilterFaByLength.pl 33 34 $fa > filterlength/$(basename $fa .trim_GAC_TAAGG.fa).keep_33-34.fa ;
@@ -175,7 +175,7 @@ for fa in $(ls collapse/*fa); do
 	perl ~/workspace/FastqManipulations/TrimGACfa.pl -| \
 	perl ~/workspace/FastqManipulations/TrimTAAGGfa.pl - > trimlinkers/${basenamefa}.trim_GAC_TAAGG.fa;
 done
-```sh
+```
 
 
 code for collapse (using the mirdeep package)
