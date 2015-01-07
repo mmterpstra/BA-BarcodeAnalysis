@@ -1,4 +1,4 @@
-<pre {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;font-size:6}>
+<style {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;font-size:6}>
 
 
 19-12-2014
@@ -17,6 +17,9 @@ The analyses consisted of the following operations on the data:
 4. Filter by length
 5. Homolog removal
 
+improvements:
+- add collapse between 3 and 4
+- include reverse sequences between 1 and 2
 
 
 Summary table
