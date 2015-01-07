@@ -182,7 +182,7 @@ code for collapse (using the mirdeep package)
 
 ```sh
 mkdir -p collapse;
-for fq in $(ls trimAdapters/*.fq); do 
+for fq in $(ls trimAdapters/*.fwtrim.fq); do 
 	dirnamefq=$(dirname $fq);
 	basenamefq=$(basename $(basename $fq .fwtrim.fq) .rvtrim.fq);
 	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
