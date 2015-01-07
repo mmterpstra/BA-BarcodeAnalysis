@@ -159,12 +159,13 @@ code for filtering by length
 
 ```sh
 mkdir -p  filterlength; 
-for fa in $(ls trimlinkers/*.fa); do 
+for fa in $(ls collapseTrimlinkers/*.fa); do 
 	perl ~/workspace/FastqManipulations/FilterFaByLength.pl 33 34 $fa > filterlength/$(basename $fa .trim_GAC_TAAGG.fa).keep_33-34.fa ;
 done
 ```
 
 collapse again
+
 ```sh
 mkdir -p collapseTrimlinkers
 for fa in $(ls trimlinkers/*.fa); do 
