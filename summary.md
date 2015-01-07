@@ -164,8 +164,14 @@ for fa in $(ls trimlinkers/*.fa); do
 done
 ```
 
-collapse again?
-
+collapse again
+```sh
+mkdir -p collapseTrimlinkers
+for fa in $(ls trimlinkers/*.fa); do 
+	basenamefa=$(basename $fa .trim_GAC_TAAGG.fa);
+	cat $fa | collapse_reads_md.pl - SEQ > collapseTrimlinkers/${basenamefa}.collapse_md.fa;
+done
+```
 code for trimming linkers
 ```sh
 mkdir -p trimlinkers;
