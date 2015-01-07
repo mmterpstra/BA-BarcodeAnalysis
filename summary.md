@@ -55,6 +55,8 @@ Read collapse
 
 recution of duplicate reads to a single fasta entry.
 fastq example:
+
+```
 @read1
 AAAAAAAAAAAAAAAAAA
 +read1
@@ -67,12 +69,15 @@ ABBDFDFDFDFDDDDDDD
 AAAAAAAAAAAAAAANAA
 +read4
 ABBDFDFDFDFDDDDDDD
+```
 
 after collapse:
-\>SEQ_1_x2
+```
+>SEQ_1_x2
 AAAAAAAAAAAAAAAAAA
-\>SEQ_3_x1
+>SEQ_3_x1
 AAAAAAAAAAAAAAANAA
+```
 
 Linker trim
 ===========
@@ -124,7 +129,8 @@ for t in $(ls *.tsv) ; do
     echo $t;
     head -1 $t >${t}.tmp;
     tail -n+2 $t|sort -d$(echo -e "\t") -k2,2n  >>${t}.tmp;
-    Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf;
+    Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;
+    mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf;
     rm ${t}.tmp ;
 done
 ```
