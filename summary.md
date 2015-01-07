@@ -1,6 +1,20 @@
 <pre {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;font-size:6}>
 
 19-12-2014
+Intro
+=====
+
+The barcode data was analysed using mirdeep helper scripts and custom made scripts present here.
+
+The analyses consisted of the following operations on the data:
+
+1. Adapter trim
+2. Read collapse
+3. Linker trim
+4. Filter by length
+5. Homolog removal
+
+
 
 Summary table
 =============
