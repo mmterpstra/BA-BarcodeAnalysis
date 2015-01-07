@@ -14,12 +14,13 @@ The analyses consisted of the following operations on the data:
 1. Adapter trim
 2. Read collapse
 3. Linker trim
-4. Filter by length
-5. Homolog removal
+4. collapse again
+5. Filter by length
+6. Homolog removal 1mm
+7. Homolog removal 2mm
 
 improvements:
-- add collapse between 3 and 4
-- include reverse sequences between 1 and 2
+- merge files and do homolog removal
 
 
 Summary table
