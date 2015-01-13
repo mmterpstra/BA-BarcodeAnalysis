@@ -184,6 +184,14 @@ for fa in $(ls filterlength/*/bctrim.collapsed.fa); do
 done
 ```
 
+Filter for homolog barcodes 2mm
+
+```sh
+ for i in $(ls filterlength/*/*.fa); 
+ 	perl ~/workspace/FastqManipulations/barcodeCleanup.pl 2 $i &
+ done
+```
+
 Filter for homolog barcodes
 
 ```sh
