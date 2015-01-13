@@ -1,9 +1,5 @@
 <style {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;font-size:6}>
 
-
-19-12-2014
-
-
 Intro
 =====
 
@@ -36,21 +32,26 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 3	|	Trim on linkers			|	17-eGFPfwd3E	|	1395112	|	69513
 4	|	Collapse after linker trim	|	17-eGFPfwd3E	|	1395112	|	65486
 5	|	Filter on length		|	17-eGFPfwd3E	|	1297389	|	58390
+6	|	Homolog removal 1mm		|	17-eGFPfwd3E	|	1183152	|	855
 1	|	Adapter trim			|	18-eGFPfwd3L	|	1481063/1119915 (fwd/reverse)	|	
 2	|	Collapse after adapter trim	|	18-eGFPfwd3L	|	2600978	|	158669
 3	|	Trim on linkers			|	18-eGFPfwd3L	|	2512249	|	134702
 4	|	Collapse after linker trim	|	18-eGFPfwd3L	|	2512249	|	134210
 5	|	Filter on length		|	18-eGFPfwd3L	|	2334138	|	119084
+6	|	Homolog removal 1mm		|	18-eGFPfwd3L	|	2086164	|	1367
 1	|	Adapter trim			|	8-eGFPfwd3L	|	1543617/1562697 (fwd/reverse)	|	
 2	|	Collapse after adapter trim	|	8-eGFPfwd3L	|	3106314	|	163385
 3	|	Trim on linkers			|	8-eGFPfwd3L	|	3010420	|	139339
 4	|	Collapse after linker trim	|	8-eGFPfwd3L	|	3010420	|	138903
 5	|	Filter on length		|	8-eGFPfwd3L	|	2782738	|	118561
-1	|	Adapter trim			|	eGFPfwd3-193	|	867406/1208614 (fwd/reverse)	|	
+6	|	Homolog removal 1mm		|	8-eGFPfwd3L	|	2504569	|	1868
+1	|	Adapter trim			|	eGFPfwd3-193	|	867406/1208614 (fwd/reverse)|
 2	|	Collapse after adapter trim	|	eGFPfwd3-193	|	2076020	|	110927
 3	|	Trim on linkers			|	eGFPfwd3-193	|	2013563	|	94335
 4	|	Collapse after linker trim	|	eGFPfwd3-193	|	2013563	|	93985
 5	|	Filter on length		|	eGFPfwd3-193	|	1862435	|	80481
+6	|	Homolog removal 1mm		|	eGFPfwd3-193	|	1700850	|	1288
+
 
 
 old:
