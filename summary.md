@@ -57,8 +57,8 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 5	|	Filter on length		|	eGFPfwd3-193	|	1862435	|	80481
 6	|	Homolog removal 1mm		|	eGFPfwd3-193	|	1700850	|	1288 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/eGFPfwd3-193.collapse_md.keep_33-34.fa.pdf?raw=true)
 8	|	Homolog removal 2mm		|	eGFPfwd3-193	|	-	|	- 
-7	|	Merge Datasets			|	Merged		|	7474735	|	3565
--	|	Homolog removal 1mm		|	Merged		|	7474583	|	3502 
+7	|	Merge Datasets			|	Merged		|	7474735	|	3565 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/bctrim.pdf?raw=true)
+-	|	Homolog removal 1mm		|	Merged		|	7474583	|	3502 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/bctrim_1mm.pdf?raw=true)
 8	|	Homolog removal 2mm		|	Merged		|	-	|	- 
 
 
