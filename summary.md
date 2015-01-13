@@ -152,20 +152,20 @@ code for different tasks
 
 this is example code and will probably not work on your system.
 
-create plot
+Create plot
 
 ```sh
-for t in $(ls *.tsv) ; do 
-    echo $t;
-    head -1 $t >${t}.tmp;
-    tail -n+2 $t|sort -d$(echo -e "\t") -k2,2n  >>${t}.tmp;
-    Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;
-    mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf;
-    rm ${t}.tmp ;
+for t in $(ls *.tsv) ; do
+	echo $t;
+	head -1 $t >${t}.tmp;
+	tail -n+2 $t|sort -d$(echo -e "\t") -k2,2nr  >>${t}.tmp;
+	Rscript ../PcrProductKlaas/CreateHist.R ${t}.tmp;
+	mv $(basename ${t} .tsv).tmp.pdf $(basename $t .tsv).pdf;
+	rm ${t}.tmp ;
 done
 ```
 
-create tsv
+Create tsv
 
 ```sh
 for fa in $(ls filterlength/*/bctrim.collapsed.fa); do 
@@ -176,7 +176,7 @@ for fa in $(ls filterlength/*/bctrim.collapsed.fa); do
 done
 ```
 
-filter for homolog barcodes
+Filter for homolog barcodes
 
 ```sh
 (for i in $(ls filterlength/*.fa); do 
