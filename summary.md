@@ -35,31 +35,31 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 4	|	Collapse after linker trim	|	17-eGFPfwd3E	|	1395112	|	65486
 5	|	Filter on length		|	17-eGFPfwd3E	|	1297389	|	58390
 6	|	Homolog removal 1mm		|	17-eGFPfwd3E	|	1183152	|	855 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/17-eGFPfwd3E.collapse_md.keep_33-34.fa.pdf?raw=true)
-8	|	Homolog removal 2mm		|	17-eGFPfwd3E	|	-	|	- 
+8	|	Homolog removal 2mm		|	17-eGFPfwd3E	|	1178649	|	756
 1	|	Adapter trim			|	18-eGFPfwd3L	|	1481063/1119915 (fwd/reverse)	|	
 2	|	Collapse after adapter trim	|	18-eGFPfwd3L	|	2600978	|	158669
 3	|	Trim on linkers			|	18-eGFPfwd3L	|	2512249	|	134702
 4	|	Collapse after linker trim	|	18-eGFPfwd3L	|	2512249	|	134210
 5	|	Filter on length		|	18-eGFPfwd3L	|	2334138	|	119084
 6	|	Homolog removal 1mm		|	18-eGFPfwd3L	|	2086164	|	1367 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/18-eGFPfwd3L.collapse_md.keep_33-34.fa.pdf?raw=true)
-8	|	Homolog removal 2mm		|	18-eGFPfwd3L	|	-	|	- 
+8	|	Homolog removal 2mm		|	18-eGFPfwd3L	|	2077441	|	1236 
 1	|	Adapter trim			|	8-eGFPfwd3L	|	1543617/1562697 (fwd/reverse)	|	
 2	|	Collapse after adapter trim	|	8-eGFPfwd3L	|	3106314	|	163385
 3	|	Trim on linkers			|	8-eGFPfwd3L	|	3010420	|	139339
 4	|	Collapse after linker trim	|	8-eGFPfwd3L	|	3010420	|	138903
 5	|	Filter on length		|	8-eGFPfwd3L	|	2782738	|	118561
 6	|	Homolog removal 1mm		|	8-eGFPfwd3L	|	2504569	|	1868 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/8-eGFPfwd3L.collapse_md.keep_33-34.fa.pdf?raw=true)
-8	|	Homolog removal 2mm		|	8-eGFPfwd3L	|	-	|	- 
+8	|	Homolog removal 2mm		|	8-eGFPfwd3L	|	2494862	|	1678
 1	|	Adapter trim			|	eGFPfwd3-193	|	867406/1208614 (fwd/reverse)|
 2	|	Collapse after adapter trim	|	eGFPfwd3-193	|	2076020	|	110927
 3	|	Trim on linkers			|	eGFPfwd3-193	|	2013563	|	94335
 4	|	Collapse after linker trim	|	eGFPfwd3-193	|	2013563	|	93985
 5	|	Filter on length		|	eGFPfwd3-193	|	1862435	|	80481
 6	|	Homolog removal 1mm		|	eGFPfwd3-193	|	1700850	|	1288 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/eGFPfwd3-193.collapse_md.keep_33-34.fa.pdf?raw=true)
-8	|	Homolog removal 2mm		|	eGFPfwd3-193	|	-	|	- 
+8	|	Homolog removal 2mm		|	eGFPfwd3-193	|	1694066	|	1147
 7	|	Merge Datasets			|	Merged		|	7474735	|	3565 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/bctrim.pdf?raw=true)
 -	|	Homolog removal 1mm		|	Merged		|	7474583	|	3502 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/bctrim_1mm.pdf?raw=true)
-8	|	Homolog removal 2mm		|	Merged		|	-	|	- 
+8	|	Homolog removal 2mm		|	Merged		|	7444426	|	2943
 
 
 old:
