@@ -27,6 +27,9 @@ this table tries to sum it up
 
 current:
 
+initital fastq: 13882978 reads
+
+
 step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 --------|---------------------------------------|-----------------------|---------------|----------------------
 1	|	Adapter trim			|	17-eGFPfwd3E	|	843410/644126 (fwd/reverse)	|	
@@ -61,6 +64,8 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 -	|	Homolog removal 1mm		|	Merged		|	7474583	|	3502 [pdf](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/pdf/bctrim_1mm.pdf?raw=true)
 8	|	Homolog removal 2mm		|	Merged		|	7444426	|	2943
 
+Conclusion:
+Not all data is cleanable by allowing 1 or more nucleotide polymorfisms so for better cleanup indels should be considered. The results here show that the dataset complexity of about 500 artificial sequences mixed equally result in many more observed sequences depending on the depth of sequencing. Also the cleanup is able to reduce dataset complexity to 1% of the initial unique sequences and should be used to reduce false discoveries. The demultiplexing and complexity reduction of reads also has applications in increasing the amount of pooled samples in a single sequencing run and possibly miRNA's. 
 
 old:
 
@@ -71,7 +76,6 @@ old:
 8-eGFPfwd3L| 1543617/1562697 | | 1543617 | 88881 |  | 137310 | 2407 | 8.90% |  | 127675 | 2219 | 8.27% |  | 1247783 | 742
 eGFPfwd3-193| 867406/1208614 | | 867406 | 49302 |  | 77798 | 875 | 8.97% |  | 72331 | 793 | 8.34% |  | 717257 | 669
 
-initital fastq: 13882978 reads
 
 
 Adapter trim
