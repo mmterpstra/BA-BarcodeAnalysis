@@ -5,9 +5,9 @@ Intro
 
 The barcode data was analysed using mirdeep helper scripts and custom made scripts present here.
 
-The analyses consisted of the following operations on the data:
+The analyses consisted of the following operations on the data to find the best amount of barcodes:
 
-1. Adapter trim
+1. Adapter trim (bc adapter and the adapter containing the samplespecific part)
 2. Read collapse
 3. Linker trim
 4. collapse again
@@ -20,6 +20,12 @@ The analyses consisted of the following operations on the data:
 improvements:
 - merge files and do homolog removal
 
+On the on the ~195 samples the following workflow was performed:
+1. Samplespecific trim (the adapter containing the samplespecific part)
+2. Trim by subset adapters
+
+#covert samplespecific fastq to collaped fasta
+for fa in $(ls sampleSpecific1mm/b[123]/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
 
 Summary table
 =============
