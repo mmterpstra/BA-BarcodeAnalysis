@@ -29,15 +29,19 @@ The analyses consisted of the following operations on the data to find the best 
    - homolog removal 1mm?
 8. Homolog removal 2mm on single and merged datasets
 
-improvements:
-- merge files and do homolog removal
+Then we did a quantification run on the 4 pools, only checking the samplespecific adapter and the random barcode improving the  yield:
 
-On the on the ~195 samples the following workflow was performed:
-1. Samplespecific trim (the adapter containing the samplespecific part)
-2. Trim by subset adapters
+1. Adapter trim (the adapter containing the samplespecific part)
+2. Read collapse
+3. Adapter trim (for each of the ~500 barcodes)
 
-#covert samplespecific fastq to collaped fasta
-for fa in $(ls sampleSpecific1mm/b[123]/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
+Then we did a quantification run on the ~200 samples:
+
+1. Adapter trim (the adapter containing the samplespecific part)
+2. Read collapse
+3. Adapter trim (for each of the ~500 barcodes)
+
+
 
 Summary table
 =============
@@ -181,6 +185,16 @@ code for different tasks
 ========================
 
 this is example code and will probably not work on your system.
+
+
+Convert samplespecific fastq to collaped fasta
+
+```sh
+for fa in $(ls sampleSpecific1mm/b[123]/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
+```
+
+Adapter trim only samplespecific
+
 
 Create plot
 
