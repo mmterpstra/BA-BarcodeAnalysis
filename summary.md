@@ -10,9 +10,11 @@ The sequencing of artificial constructs from
 
 A transfection has been performed to different cell cultures with artificial constructs. This can ben used for tracking individual cells if the library density is high enough or can be used for to asses of homogenity of proliferation of the cell culture. In our experiment we have used the barcodes for assesment of the selective pressure of the barcodes so it can be compared with antisense mediated knockdowns of genes.
 
-We did this in two steps:
- 1. Analysis of the four barcode pools consisting of about 500 random barcodes..
- 2. Analysis of ~200 samples...
+We did this in 3 main parts:
+
+ 1. Analysis of the four barcode pools and selection of about 500 random barcodes..
+ 1. Quantify run of the four barcode pools consisting of about 500 random barcodes and removal of multiple mapping barcodes
+ 3. Quantify run of ~200 samples...
 
 Analysis of 4 barcode pools
 ===========================
@@ -43,8 +45,9 @@ Then we did a quantification run on the ~200 samples:
 
 
 
-Summary table
-=============
+Summary table of analysis of 4 barcode pools
+============================
+
 this table tries to sum it up
 
 current:
@@ -89,17 +92,6 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 Conclusion:
 Not all data is cleanable by allowing 1 or more nucleotide polymorfisms so for better cleanup indels should be considered. The results here show that the dataset complexity of about 500 artificial sequences mixed equally result in many more observed sequences depending on the depth of sequencing. Also the cleanup is able to reduce dataset complexity to 1% of the initial unique sequences and should be used to reduce false discoveries. The demultiplexing and complexity reduction of reads also has applications in increasing the amount of pooled samples in a single sequencing run and possibly miRNA's. 
 
-old:
-
-1. sample after adapter trim | reads(fwd/reverse) | 2. after collapse reads | Reads | Collapsed reads | 3. remove linkers (GAC/TAAGG/TACCAGTAAGG) | Reads | Collapsed reads | % Reads vs 2. after collapse | 4. Filter on length >= 33 &  <= 34 | Reads | Collapsed reads | % Reads vs Reads at collapse | 5. Remove homologs | Reads | Collapsed reads
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-17-eGFPfwd3E | 843410/644126  | | 843410 | 60415 |  | 71968 | 1411 | 8.53% |  | 67202 | 1307 | 7.97% |  | 649390 | 640
-18-eGFPfwd3L| 1481063/1119915 | | 1481063 | 106581 |  | 128694 | 1945 | 8.69% |  | 120046 | 1793 | 8.11% |  | 1177324 | 901
-8-eGFPfwd3L| 1543617/1562697 | | 1543617 | 88881 |  | 137310 | 2407 | 8.90% |  | 127675 | 2219 | 8.27% |  | 1247783 | 742
-eGFPfwd3-193| 867406/1208614 | | 867406 | 49302 |  | 77798 | 875 | 8.97% |  | 72331 | 793 | 8.34% |  | 717257 | 669
-
-
-
 Adapter trim
 ============
 
@@ -112,12 +104,10 @@ PCRset | Forward primer name | Forward primer sequence | Forward primer sequence
 3 | eGFPfwd3-193 | TCATCTCTGGCATGGACGAGCTGTACAAG | TCATCTCTGGCATGGACGAGCTGTACAAG | BC-rev-L+5:   | AATATGGGGGATCCTCACTGGCC
 4 | 18-eGFPfwd3L | ATCGAATTTATGGCATGGACGAGCTGTACAAG | ATCGAATTTATGGCATGGACGAGCTGTACAAG | BC-rev-L+1:   | TGGGGGATCCTCACTGGCC
 
-
-
 Read collapse
 =============
 
-recution of duplicate reads to a single fasta entry.
+reduction of duplicate reads to a single fasta entry.
 fastq example:
 
 ```
@@ -177,6 +167,7 @@ Homolog removal (again)
 Removal of similar sequences by trimming data.
 
 this was done:
+
  - Allowing **2** single nucleotide mismatches
  - Removing the reads with a count less than or equal to 1
  - Removing reads when it has a homolog read with a higher count
@@ -190,11 +181,22 @@ this is example code and will probably not work on your system.
 Convert samplespecific fastq to collaped fasta
 
 ```sh
-for fa in $(ls sampleSpecific1mm/b[123]/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
+for fa in $(ls sampleSpecific1mm/b*/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
 ```
 
 Adapter trim only samplespecific
 
+```sh
+mkdir trimSampleSpecific1mm
+largeCmd=$(for data in $(cat samplesheet.csv); do 
+    CMD=$data";
+    echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
+    perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a \$(perl -wpe 'chomp;\$_=reverse(\$_);tr/ATCGNatcgn/TAGCNtagcn/;' <(echo \$fwdPrimer)) -B -m 1 -o - >trimSampleSpecific1mm/\${samplename}.fwtrim.fq) &
+    echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
+    perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a  \$fwdPrimer -A -m 1 -o - > trimSampleSpecific1mm/\${samplename}.fwtrim.fq) &" ; 
+    echo $CMD;
+done)
+```
 
 Create plot
 
@@ -209,7 +211,7 @@ for t in $(ls *.tsv) ; do
 done
 ```
 
-Create tsv
+8. Create tsv
 
 ```sh
 for fa in $(ls filterlength/*/bctrim.collapsed.fa); do 
@@ -220,7 +222,7 @@ for fa in $(ls filterlength/*/bctrim.collapsed.fa); do
 done
 ```
 
-Filter for homolog barcodes 2mm
+8. Filter for homolog barcodes 2mm
 
 ```sh
  for i in $(ls filterlength/*/*.fa); 
@@ -228,7 +230,15 @@ Filter for homolog barcodes 2mm
  done
 ```
 
-Filter for homolog barcodes
+7. collapse_md samples into single sample and filter for homolog barcodes
+
+```sh
+#something like
+cat filterlength/*/*.fa| collapse_reads_md.pl - SEQ > filterlength/merged.collapse_md.fa
+perl ~/workspace/FastqManipulations/barcodeCleanup.pl filterlength/merged.collapse_md.fa
+```
+
+6. Filter for homolog barcodes
 
 ```sh
 (for i in $(ls filterlength/*.fa); do 
@@ -237,7 +247,7 @@ Filter for homolog barcodes
 done)&
 ```
 
-code for filtering by length
+5. code for filtering by length
 
 ```sh
 mkdir -p  filterlength; 
@@ -246,7 +256,7 @@ for fa in $(ls collapseTrimlinkers/*.fa); do
 done
 ```
 
-collapse again
+4. collapse again
 
 ```sh
 mkdir -p collapseTrimlinkers
@@ -255,7 +265,7 @@ for fa in $(ls trimlinkers/*.fa); do
 	cat $fa | collapse_reads_md.pl - SEQ > collapseTrimlinkers/${basenamefa}.collapse_md.fa;
 done
 ```
-code for trimming linkers
+3. code for trimming linkers
 ```sh
 mkdir -p trimlinkers;
 for fa in $(ls collapse/*fa); do 
@@ -267,7 +277,7 @@ done
 ```
 
 
-code for collapse (using the mirdeep package)
+2. code for collapse (using the mirdeep package)
 
 ```sh
 mkdir -p collapse;
@@ -281,10 +291,12 @@ for fq in $(ls trimAdapters/*.fwtrim.fq); do
 done
 ```
 
-code for trimming adapters
+1. code for trimming adapters
 
 ```sh
-for data in $(cat samplesheet.csv); do 
+mkdir trimAdapters
+
+largeCmd=$(for data in $(cat samplesheet.csv); do 
 	CMD=$data";
 	echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
 	perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a \$(perl -wpe 'chomp;\$_=reverse(\$_);tr/ATCGNatcgn/TAGCNtagcn/;' <(echo \$fwdPrimer)) -B -m 1 -o - |\
@@ -293,9 +305,11 @@ for data in $(cat samplesheet.csv); do
 	perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a  \$fwdPrimer -A -m 1 -o - | \
 	perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a \$(perl -wpe 'chomp;\$_=reverse(\$_);tr/ATCGNatcgn/TAGCNtagcn/;' <(echo \$reversePrimer )) -B -m 1 -o - > trimAdapters/\${samplename}.fwtrim.fq) &" ; 
 	echo $CMD;
-done
+done)
+echo $largeCmd
+#bash <($largeCmd)
 ```
-copypase/pipe to bash the returned commands are good for trimming
+copypaste/redirect to bash:the returned commands are good for trimming
 
 The data
 ========
