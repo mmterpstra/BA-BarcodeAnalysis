@@ -1,10 +1,22 @@
 <style {font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;font-size:6}>
 
+
+
 Intro
 =====
 
-The barcode data was analysed using mirdeep helper scripts and custom made scripts present here.
 
+The sequencing of artificial constructs from
+
+A transfection has been performed to different cell cultures with artificial constructs. This can ben used for tracking individual cells if the library density is high enough or can be used for to asses of homogenity of proliferation of the cell culture. In our experiment we have used the barcodes for assesment of the selective pressure of the barcodes so it can be compared with antisense mediated knockdowns of genes.
+
+We did this in two steps:
+ 1. Analysis of the four barcode pools consisting of about 500 random barcodes..
+ 2. Analysis of ~200 samples...
+
+Analysis of 4 barcode pools
+===========================
+The barcode data was analysed using mirdeep helper scripts and custom made scripts present here.
 The analyses consisted of the following operations on the data to find the best amount of barcodes:
 
 1. Adapter trim (bc adapter and the adapter containing the samplespecific part)
