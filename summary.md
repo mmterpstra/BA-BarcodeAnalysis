@@ -5,10 +5,7 @@
 Intro
 =====
 
-
-The sequencing of artificial constructs from
-
-A transfection has been performed to different cell cultures with artificial constructs. This can ben used for tracking individual cells if the library density is high enough or can be used for to asses of homogenity of proliferation of the cell culture. In our experiment we have used the barcodes for assesment of the selective pressure of the barcodes so it can be compared with antisense mediated knockdowns of genes.
+Artificial barcodes have been sequenced after pooling the 500 barcodes together and after lentiviral transduction of cell cultures. This can ben used for tracking individual cells if the library density is high enough or can be used for to asses of homogenity of proliferation of the cell culture. In our experiment we have used the barcodes for assesment of the selective pressure of the barcodes so it can be compared with lentiviral sh mediated knockdowns or lentiviral knockin of genes.
 
 We did this in 3 main parts:
 
@@ -37,13 +34,15 @@ Then we did a quantification run on the 4 pools, only checking the samplespecifi
 2. Read collapse
 3. Adapter trim (for each of the ~500 barcodes)
 
+This is done twice once for 0 mismatches and once for 1 mismatches in steps 1 & 3. 
+
 Then we did a quantification run on the ~200 samples:
 
 1. Adapter trim (the adapter containing the samplespecific part)
 2. Read collapse
 3. Adapter trim (for each of the ~500 barcodes)
 
-
+This is done twice once for 0 mismatches and once for 1 mismatches in steps 1 & 3.
 
 Summary table of analysis of 4 barcode pools
 ============================
