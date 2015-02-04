@@ -47,7 +47,7 @@ This is done twice once for 0 mismatches and once for 1 mismatches in steps 1 & 
 Summary table of analysis of 4 barcode pools
 ============================
 
-this table tries to sum it up
+this table tries to summarise the results
 
 current:
 
@@ -90,6 +90,43 @@ step	|	stepname			|	sample		|	Reads	|	Collapsed reads
 
 Conclusion:
 Not all data is cleanable by allowing 1 or more nucleotide polymorfisms so for better cleanup indels should be considered. The results here show that the dataset complexity of about 500 artificial sequences mixed equally result in many more observed sequences depending on the depth of sequencing. Also the cleanup is able to reduce dataset complexity to 1% of the initial unique sequences and should be used to reduce false discoveries. The demultiplexing and complexity reduction of reads also has applications in increasing the amount of pooled samples in a single sequencing run and possibly miRNA's. 
+
+quantification run on the 4 pools
+
+under construction
+initital fastq (same as prevous): 13882978 reads
+
+
+step | stepname				| sample		| Reads		| Collapsed reads	| mm
+-----|----------------------------------|-----------------------|---------------|-----------------------|---
+1    | Samplespecific adapter trim 	| 17-eGFPfwd3E 		| 2670617	| 505966		| 0
+2    | Read collapse		 	| 17-eGFPfwd3E 		| 2670617	| 505966		| 0
+3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 1320940	| 215446		| 0
+1    | Samplespecific adapter trim 	| 17-eGFPfwd3E 		| 2792101	| 551772		| 1
+2    | Read collapse		 	| 17-eGFPfwd3E 		| 2792101	| 551772		| 1
+3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 1420575	| 294189		| 1
+1    | Samplespecific adapter trim 	| 18-eGFPfwd3L 		| 2424959	| 443085		| 0
+2    | Read collapse		 	| 18-eGFPfwd3L 		| 2424959	| 443085		| 0
+3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 1262086	| 194156		| 0
+1    | Samplespecific adapter trim 	| 18-eGFPfwd3L 		| 2688475	| 508716		| 1
+2    | Read collapse		 	| 18-eGFPfwd3L 		| 2688475	| 508716		| 1
+3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 1366824	| 274518		| 1
+1    | Samplespecific adapter trim 	| 8-eGFPfwd3L 		| 2844152	| 485055		| 0
+2    | Read collapse		 	| 8-eGFPfwd3L 		| 2844152	| 485055		| 0
+3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 1385289 	| 216965		| 0
+1    | Samplespecific adapter trim 	| 8-eGFPfwd3L 		| 3280829	| 582815		| 1
+2    | Read collapse		 	| 8-eGFPfwd3L 		| 3280829	| 582815		| 1
+3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 1497313	| 302460		| 1
+1    | Samplespecific adapter trim 	| eGFPfwd3-193 		| 2563602	| 414875		| 0
+2    | Read collapse		 	| eGFPfwd3-193 		| 2563602	| 414875		| 0
+3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 1018958	| 169809		| 0
+1    | Samplespecific adapter trim 	| eGFPfwd3-193 		| 2776328	| 461136		| 1
+2    | Read collapse		 	| eGFPfwd3-193 		| 2776328	| 461136		| 1
+3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 1084053	| 222372		| 1
+
+quantification run on the ~200 samples
+
+
 
 Adapter trim
 ============
