@@ -239,13 +239,13 @@ done)
 
 ```sh
 for fq in $(ls trimSampleSpecific1mm/*.fwtrim.fq); do 
-	mkdir -p $dirnamefq/collapse;
 	dirnamefq=$(dirname $fq);
 	basenamefq=$(basename $(basename $fq .fwtrim.fq) .rvtrim.fq);
+	mkdir -p $dirnamefq/collapse;
 	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
 		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.rvtrim.fq) | \
 	fastq2fasta.pl -| \
-	collapse_reads_md.pl - SEQ > $dirnamefq/collapse/${basenamefq}.collapse_md.2.fa;
+	collapse_reads_md.pl - SEQ > $dirnamefq/collapse/${basenamefq}.collapse_md.fa;
 done
 ```
 
