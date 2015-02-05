@@ -211,16 +211,17 @@ this was done:
 code for different tasks
 ========================
 
-this is example code and will probably not work on your system.
+this is example code and will probably not work on your system, or might botch because of missing stuff.
+
+
+quantification run
+=====
+
 
 
 Convert samplespecific fastq to collaped fasta
 
-```sh
-for fa in $(ls sampleSpecific1mm/b*/*[ATCGN].fa); do fastq2fasta.pl $fa | collapse_reads_md.pl - SEQ > $(dirname $fa)/$(basename $fa .fa).collapse_md.fa;done
-```
-
-Adapter trim only samplespecific
+1. Adapter trim only samplespecific
 
 ```sh
 mkdir trimSampleSpecific1mm
@@ -229,10 +230,27 @@ largeCmd=$(for data in $(cat samplesheet.csv); do
     echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
     perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a \$(perl -wpe 'chomp;\$_=reverse(\$_);tr/ATCGNatcgn/TAGCNtagcn/;' <(echo \$fwdPrimer)) -B -m 1 -o - >trimSampleSpecific1mm/\${samplename}.fwtrim.fq) &
     echo \$(gzip -dc KlaasPCRproducten_S1_L001_R1_001.fastq.gz| \
-    perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a  \$fwdPrimer -A -m 1 -o - > trimSampleSpecific1mm/\${samplename}.fwtrim.fq) &" ; 
+    perl ~/workspace/FastqManipulations/adapterTrimmer.pl -i - -a  \$fwdPrimer -A -m 1 -o - > trimSampleSpecific1mm/\${samplename}.rvtrim.fq) &" ; 
     echo $CMD;
 done)
 ```
+
+2. collapse
+
+```sh
+for fq in $(ls trimSampleSpecific1mm/*.fwtrim.fq); do 
+	mkdir -p $dirnamefq/collapse;
+	dirnamefq=$(dirname $fq);
+	basenamefq=$(basename $(basename $fq .fwtrim.fq) .rvtrim.fq);
+	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
+		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.rvtrim.fq) | \
+	fastq2fasta.pl -| \
+	collapse_reads_md.pl - SEQ > $dirnamefq/collapse/${basenamefq}.collapse_md.2.fa;
+done
+```
+
+finding unique barcode subset of ~500 barcodes
+========
 
 Create plot
 
@@ -323,7 +341,7 @@ for fq in $(ls trimAdapters/*.fwtrim.fq); do
 	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
 		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.rvtrim.fq) | \
 	fastq2fasta.pl -| \
-	collapse_reads_md.pl - SEQ > collapse/${basenamefq}.collapse_md.fa;
+	collapse_reads_md.pl - SEQ > collapse/${basenamefq}.collapse_md.2.fa;
 done
 ```
 
