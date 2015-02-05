@@ -221,7 +221,7 @@ quantification run
 
 Convert samplespecific fastq to collaped fasta
 
-1. Adapter trim only samplespecific
+1 Adapter trim only samplespecific
 
 ```sh
 mkdir trimSampleSpecific1mm
@@ -235,18 +235,37 @@ largeCmd=$(for data in $(cat samplesheet.csv); do
 done)
 ```
 
-2. collapse
+2 collapse
 
 ```sh
 for fq in $(ls trimSampleSpecific1mm/*.fwtrim.fq); do 
 	dirnamefq=$(dirname $fq);
 	basenamefq=$(basename $(basename $fq .fwtrim.fq) .rvtrim.fq);
 	mkdir -p $dirnamefq/collapse;
-	cat $dirnamefq/${basenamefq}.fwtrim.fq  <(
-		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.rvtrim.fq) | \
+	cat $dirnamefq/${basenamefq}.rvtrim.fq  <(
+		perl -wpe 'chomp;$_=reverse($_);tr/ATCGNatcgn/TAGCNtagcn/;$_.="\n";' $dirnamefq/${basenamefq}.fwtrim.fq) | \
 	fastq2fasta.pl -| \
 	collapse_reads_md.pl - SEQ > $dirnamefq/collapse/${basenamefq}.collapse_md.fa;
 done
+```
+
+3 Barcode specific trim + creation of tsv
+
+```sh
+#0mismatches
+( for fa in $(ls  trimSampleSpecific*mm/collapse2/*.fa);
+do
+    perl ~/workspace/BarcodeAnalysis/scripts/MultiAdapterTrimmingWrapperCollapseMd.pl $fa SelectionBarcodePools.collapse_md.fa 0 &
+done )
+#1mm
+( for fa in $(ls  trimSampleSpecific*mm/collapse2/*.fa);
+do
+    perl ~/workspace/BarcodeAnalysis/scripts/MultiAdapterTrimmingWrapperCollapseMd.pl $fa SelectionBarcodePools.collapse_md.fa 0 &
+done )
+#tsv creation
+for dir in $(ls trimSampleSpecific1mm/collapse/*/ -d); do perl ~/workspace/miRNA_stuffs/Collapsed_Summary.pl ${dir}*.fa > $(echo $dir| perl -wpe 's/\/$//g').quantify.tsv & done
+#maybe cleanup
+rm -rv trimSampleSpecific1mm/collapse/*/
 ```
 
 finding unique barcode subset of ~500 barcodes
