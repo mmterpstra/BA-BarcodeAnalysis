@@ -124,8 +124,9 @@ step | stepname				| sample		| Reads		| Collapsed reads	| mm
 2    | Read collapse		 	| eGFPfwd3-193 		| 2776328	| 461136		| 1
 3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 2329905	| 303702		| 1
 
-yield 0mm = (2261443 + 2021103 + 2396236 + 2190566) / 13882978 = 0.64
-yield 1mm = (2416519 + 2172441 + 2576582 + 2329905) / 13882978 = 0.68
+```yield 0mm = (2261443 + 2021103 + 2396236 + 2190566) / 13882978 = 0.64 ```
+
+```yield 1mm = (2416519 + 2172441 + 2576582 + 2329905) / 13882978 = 0.68 ```
 
 quantification run on the ~200 samples
 
