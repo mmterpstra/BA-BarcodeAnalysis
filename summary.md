@@ -101,31 +101,35 @@ step | stepname				| sample		| Reads		| Collapsed reads	| mm
 -----|----------------------------------|-----------------------|---------------|-----------------------|---
 1    | Samplespecific adapter trim 	| 17-eGFPfwd3E 		| 2670617	| 505966		| 0
 2    | Read collapse		 	| 17-eGFPfwd3E 		| 2670617	| 505966		| 0
-3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 1320940	| 215446		| 0
+3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 2261443	| 257669		| 0
 1    | Samplespecific adapter trim 	| 17-eGFPfwd3E 		| 2792101	| 551772		| 1
 2    | Read collapse		 	| 17-eGFPfwd3E 		| 2792101	| 551772		| 1
-3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 1420575	| 294189		| 1
+3    | Barcode adapter trim	 	| 17-eGFPfwd3E 		| 2416519	| 371907		| 1
 1    | Samplespecific adapter trim 	| 18-eGFPfwd3L 		| 2424959	| 443085		| 0
 2    | Read collapse		 	| 18-eGFPfwd3L 		| 2424959	| 443085		| 0
-3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 1262086	| 194156		| 0
+3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 2021103	| 207016		| 0
 1    | Samplespecific adapter trim 	| 18-eGFPfwd3L 		| 2688475	| 508716		| 1
 2    | Read collapse		 	| 18-eGFPfwd3L 		| 2688475	| 508716		| 1
-3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 1366824	| 274518		| 1
+3    | Barcode adapter trim	 	| 18-eGFPfwd3L 		| 2172441	| 311691		| 1
 1    | Samplespecific adapter trim 	| 8-eGFPfwd3L 		| 2844152	| 485055		| 0
 2    | Read collapse		 	| 8-eGFPfwd3L 		| 2844152	| 485055		| 0
-3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 1385289 	| 216965		| 0
+3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 2396236 	| 220525		| 0
 1    | Samplespecific adapter trim 	| 8-eGFPfwd3L 		| 3280829	| 582815		| 1
 2    | Read collapse		 	| 8-eGFPfwd3L 		| 3280829	| 582815		| 1
-3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 1497313	| 302460		| 1
+3    | Barcode adapter trim	 	| 8-eGFPfwd3L 		| 2576582	| 338302		| 1
 1    | Samplespecific adapter trim 	| eGFPfwd3-193 		| 2563602	| 414875		| 0
 2    | Read collapse		 	| eGFPfwd3-193 		| 2563602	| 414875		| 0
-3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 1018958	| 169809		| 0
+3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 2190566	| 209101		| 0
 1    | Samplespecific adapter trim 	| eGFPfwd3-193 		| 2776328	| 461136		| 1
 2    | Read collapse		 	| eGFPfwd3-193 		| 2776328	| 461136		| 1
-3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 1084053	| 222372		| 1
+3    | Barcode adapter trim	 	| eGFPfwd3-193 		| 2329905	| 303702		| 1
+
+yield 0mm = (2261443 + 2021103 + 2396236 + 2190566) / 13882978 = 0.64
+yield 1mm = (2416519 + 2172441 + 2576582 + 2329905) / 13882978 = 0.68
 
 quantification run on the ~200 samples
 
+Work in progress
 
 
 Adapter trim
