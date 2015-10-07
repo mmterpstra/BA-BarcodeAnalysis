@@ -8,12 +8,14 @@ the [summary.md](https://github.com/mmterpstra/BA-BarcodeAnalysis/blob/master/su
 
 If you got here looking for demultiplexing ngs reads look for:
 
-[bbduk from the bbmap package](http://sourceforge.net/projects/bbmap/)
+[bclToFastq](http://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html): demultiplexing / optional adapter trimming /masking and conversion to fastq
 
-[cutadapt](https://github.com/marcelm/cutadapt)
+[bbduk from the bbmap package](http://sourceforge.net/projects/bbmap/):demultiplexing and adapter trimming and many more 
 
-[fastqc](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+[cutadapt](https://github.com/marcelm/cutadapt):removing adapters
 
-[ea-utils](https://code.google.com/p/ea-utils/)
+[fastqc](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/): assesing resulting fastq files
 
-If you want to apply an extended barcode(14nt for example consisting of a samplespecific part and a semi-random part goto my project [DigitalBarcodeReadgroups](https://github.com/mmterpstra/DigitalBarcodeReadgroups)
+[ea-utils](https://code.google.com/p/ea-utils/):another toolkit for demultiplexing / adapter trimming
+
+[DigitalBarcodeReadgroups](https://github.com/mmterpstra/DigitalBarcodeReadgroups): If you want to apply an extended barcode (for example consisting of a samplespecific part and a semi-random part).
