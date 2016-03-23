@@ -19,7 +19,7 @@ while(<>){
 	$h=substr($h,1);
 	$_ = <> or die "The file should be single line fastq thus it shouldent end in an odd line number";
 	chomp;
-	my $s=$_;warn $s;
+	my $s=$_;#warn $s;
 	$collapse -> {"$s"} -> {"l"}	= $. if(not($collapse -> {"$s"} -> {"l"}));
 	$collapse -> {"$s"} -> {"h"}	= $h;
         $collapse -> {"$s"} -> {"s"}	= $s;#not really efficient memory wise though...
