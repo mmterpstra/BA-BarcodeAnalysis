@@ -32,6 +32,7 @@ optional switches
 		 substring is taken [default 1000]
 	-s INT	smallest read size to allow in reads. if smaller read is ignored
 		 or returned as seq:N qual:B sequences [default 1]
+	-b	unbuffered output for realtime debugging/testing
 
 examples:
 	$0 -i FILE -a tacga -A
@@ -83,7 +84,7 @@ if (scalar(@ARGV)==0){
 
 use Getopt::Std;
 my %cmdOptions;
-getopts('i:a:o:U:f:BAm:Nuvps:l:d:', \%cmdOptions);
+getopts('i:a:bo:U:f:BAm:Nuvps:l:d:', \%cmdOptions);
 my $debug = 0;
 $debug=$cmdOptions{'d'} if($cmdOptions{'d'}); 
 #defaults
@@ -102,6 +103,8 @@ $trimOrientation=0 if($cmdOptions{'A'});
 
 my $adapter	= $cmdOptions{'a'};
 my $adapter_len	= length($adapter);
+
+$| = 1 if($cmdOptions{'b'});
 
 my $mismatches;
 if ($cmdOptions{'m'}){
@@ -212,14 +215,14 @@ while (not eof($in)){
 		$seqstats{'ReadsOmittedOnlyAdapter'}++;
 	
 	#the actual adapter trimming part
-	}elsif($cmdOptions{'A'} && $index >= 0){#start trim
+	}elsif($cmdOptions{'A'} && $index > -1){#start trim
 		#$seqstats{'ReadsWithAdapterTrimmed'}++;
 		$fqseq = substr($fqseq,($index+$adapter_len));
 		if(defined($fqqual)){
 			$fqqual = substr($fqqual,($index+$adapter_len));
 		}
 			
-	}elsif($cmdOptions{'B'} && $index > 0){#end trim 
+	}elsif($cmdOptions{'B'} && $index > -1){#end trim $index > 0 because that would give empty string results
 		#$seqstats{'ReadsWithAdapterTrimmed'}++;
 		$fqseq = substr($fqseq,0,$index);
 		if(defined($fqqual)){
@@ -297,7 +300,7 @@ while (not eof($in)){
 					print {$out} "\>$fqHeader1\n$fqseq\n";
 				}
 			}	
-		}elsif($index > 0){
+		}elsif($index > -1){
 			$seqstats{'ReadsInOutput'}++;
 			if(defined($fqqual)){
 				print {$out} "\@$fqHeader1\n$fqseq\n+$fqHeader1\n$fqqual\n";
