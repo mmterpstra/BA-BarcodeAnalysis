@@ -19,3 +19,5 @@ If you got here looking for demultiplexing ngs reads look for:
 [ea-utils](https://code.google.com/p/ea-utils/):another toolkit for demultiplexing / adapter trimming
 
 [DigitalBarcodeReadgroups](https://github.com/mmterpstra/DigitalBarcodeReadgroups): If you want to apply an extended barcode (for example consisting of a samplespecific part and a semi-random part).
+
+[trim_galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/): from the creator of fastqc. trims and does quality control.
