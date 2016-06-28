@@ -17,7 +17,7 @@ while(<>){
 	my $h = $_;
 	die "Invalid fast no '>' on header part " if(substr($h,0,1) ne ">");
 	$h=substr($h,1);
-	$_ = <> or die "The file should be single line fastq thus it shouldent end in an odd line number";
+	defined($_ = <>) or die "The file should be single line fastq thus it shouldent end in an odd line number";
 	chomp;
 	my $s=$_;#warn $s;
 	$collapse -> {"$s"} -> {"l"}	= $. if(not($collapse -> {"$s"} -> {"l"}));
